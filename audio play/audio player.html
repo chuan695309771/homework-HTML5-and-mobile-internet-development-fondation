@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>audio player</title>
+		<script></script>
+		<style>
+			h2{
+				color:red;
+				padding-left:680px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>在线音乐</h2>
+		<article>
+			<section>
+				千千阙歌<button id="play1" value="播放1" onclick="play1()">播放</button>
+				<button id="pause1" onclick="pause1()">暂停</button><br />
+				<audio src="01.mp3" controls="controls" id="audio01">您的浏览器不支持audio标签</audio>
+			</section>
+			<section>
+				思念人之屋<button id="play2" onclick='play2()'>播放</button>
+				<button id="pause2" onclick="pause2()">暂停</button><br/>
+				<audio src="02.mp3" controls='controls' id="audio02">您的浏览器不支持audio标签</audio>
+			</section>
+			<section>
+				
+				
+			</section>
+		</article>
+	</body>
+	<script>
+		function play1(){
+			var play1 =document.getElementById('play1');
+			var pause1=document.getElementById('pause1');
+			var audio01=document.getElementById('audio01');
+			audio01.play();
+			play1.disabled=true;
+			pause1.disabled=false;
+		}
+		function pause1(){
+			var play1 =document.getElementById('play1');
+			var pause1=document.getElementById('pause1');
+			var audio01=document.getElementById('audio01');
+			audio01.pause();
+			play1.disabled=false;
+			pause1.disabled=true;
+		}
+		function play2(){
+			var play2=document.getElementById('play2');
+			var pause2=document.getElementById('pause2');
+			var audio02=document.getElementById('audio02');
+			audio02.play();
+			play2.disabled=true;
+			pause2.disabled=false;
+		}
+		function pause2(){
+			var play2=document.getElementById('play2');
+			var pause2=document.getElementById('pause2');
+			var audio02=document.getElementById('audio02');
+			audio02.pause();
+			play2.disabled=false;
+			pause2.disabled=true;
+		}
+	</script>
+</html>
