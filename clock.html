@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>clock</title>
+	</head>
+	<body>
+		<canvas id="clock" width="1000" height="1000"></canvas>
+	</body>
+	<script type="text/javascript">
+			var canvas = document.getElementById('clock');
+			var context= canvas.getContext('2d');
+		function draw(){
+			canvas.height = canvas.height;
+			<!--表盘-->
+			context.beginPath();
+			context.lineWidth = 5;
+			context.arc(350,350,300,0,2*Math.PI,true);
+			context.strokeStyle = 'dodgerblue';
+			context.stroke();
+			context.closePath();
+			
+			<!--圆心-->
+			context.beginPath();
+			context.lineWidth = 10;
+			context.arc(350,350,5,0,2*Math.PI,true);
+			context.closePath();
+			context.stroke();
+			
+			
+			<!--刻度-->
+			context.translate(350,350);
+			context.save();
+			<!--大刻度-->
+			for(var i=0;i<60;i++){
+				context.beginPath();
+				context.strokeStyle = 'green';
+				context.rotate(6/180*Math.PI);
+				context.moveTo(260,0);
+				context.lineTo(280,0);
+				context.closePath();
+				context.stroke();
+			}
+			<!--小刻度-->
+			context.restore();
+			for(var i=0;i<12;i++){
+				context.beginPath();
+				context.strokeStyle = 'red';
+				context.rotate(30/180*Math.PI);
+				context.moveTo(251,0);
+				context.lineTo(280,0);
+				context.closePath();
+				context.stroke();
+			}
+			<!--数字-->
+			context.restore();
+			for(var i=1;i<=12;i++){
+				context.beginPath();
+				var rad = 2 * Math.PI/12*(i-3);
+				var x = Math.cos(rad) * (350 - 120);
+				var y = Math.sin(rad) * (350 - 120);
+				context.font = 'bold 25px 宋体';
+				context.fillText(i,x,y);
+				context.closePath();
+			}
+			context.save();
+			<!--获取日期-->
+			var time = new Date();
+			var hours = time.getHours();
+			var minutes = time.getMinutes();
+			var seconds = time.getSeconds();
+			hours = hours > 12 ? hours - 12 : hours;
+			var hour = hours + minutes/60;
+			var minute = minutes + seconds/60;
+			
+			context.beginPath();
+				context.save();
+				var r = hour * 30 * Math.PI / 180;
+				context.rotate(r);
+				context.moveTo(0,10);
+				context.lineTo(0,-100);
+				context.strokeStyle = "mediumpurple";
+				context.lineWidth = 8;
+				
+				context.stroke();
+				context.restore();
+				context.closePath();
+				
+				context.beginPath();
+				context.save();
+				context.rotate(minute * 6 * Math.PI / 180);				
+				context.moveTo(0,10);
+				context.lineTo(0,-140);
+				context.strokeStyle = "crimson";
+				context.lineWidth = 6;
+				context.stroke();
+				context.restore();
+				context.closePath();
+				
+				
+				context.beginPath();
+				context.save();
+				context.rotate(seconds * 6 * Math.PI / 180);
+				context.moveTo(0,-10);
+				context.lineTo(0,180);
+				context.strokeStyle = "deeppink";
+				context.lineWidth = 3;
+				context.stroke();
+				context.restore();
+				context.closePath();
+				
+			
+		}
+		setInterval(draw,1000);
+	</script>
+</html>
